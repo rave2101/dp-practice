@@ -12,6 +12,7 @@ Problems that involve traversing a 2D grid to count paths, find minimum costs, o
 | DP 9 | [Unique Paths II](https://leetcode.com/problems/unique-paths-ii/) | Medium | [YouTube](https://www.youtube.com/watch?v=TmhpgXScLyY) | [TUF](https://takeuforward.org/data-structure/grid-unique-paths-2-dp-9/) | [solution.cpp](2-unique-paths-ii/solution.cpp) |
 | DP 12 | [Minimum Falling Path Sum](https://leetcode.com/problems/minimum-falling-path-sum/) | Medium | [YouTube](https://www.youtube.com/watch?v=N_aJ5qQbYA0) | [TUF](https://takeuforward.org/data-structure/minimum-maximum-falling-path-sum-dp-12/) | [solution.cpp](3-minimum-falling-path-sum/solution.cpp) |
 | DP 11 | [Triangle](https://leetcode.com/problems/triangle/) | Medium | [YouTube](https://www.youtube.com/watch?v=SrP-PiLSYC0) | [TUF](https://takeuforward.org/data-structure/minimum-path-sum-in-triangular-grid-dp-11/) | [solution.cpp](4-triangle/solution.cpp) |
+| DP 13 | [Cherry Pickup II](https://leetcode.com/problems/cherry-pickup-ii/) | Hard | [YouTube](https://www.youtube.com/watch?v=QGfn7JeXK54) | [TUF](https://takeuforward.org/data-structure/3-d-dp-ninja-and-his-friends-dp-13/) | [solution.cpp](5-cherry-pickup-ii/solution.cpp) |
 
 ---
 
