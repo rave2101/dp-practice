@@ -215,6 +215,24 @@ Stock I only needs to find one best buy-sell pair. Stock II must decide each day
 
 ---
 
+## Same-Day Buy and Sell
+
+The problem states that buying and selling on the same day is permitted. However, **the DP never needs to handle this explicitly**.
+
+After buying at `idx`, the recursion always moves to `idx+1` before a sell is possible — the DP never evaluates buy and sell at the same index in the same call.
+
+More importantly, same-day buy+sell always nets **zero profit**:
+
+```
+buy  day i: -arr[i]
+sell day i: +arr[i]
+net = 0
+```
+
+No optimal solution would ever choose this, so the DP naturally skips it by always preferring the `no_buy` or `no_sell` path when profit is 0. The constraint is mentioned only to clarify that no enforced gap exists between buy and sell days — it has no effect on the logic.
+
+---
+
 ## Complexity Summary
 
 | Approach | Time | Space |

@@ -228,6 +228,24 @@ Only a single-term change — the fee is subtracted at the point of selling.
 
 ---
 
+## Same-Day Buy and Sell
+
+The problem states that buying and selling on the same day is permitted. However, **the DP never needs to handle this explicitly**.
+
+After buying at `idx`, the recursion always moves to `idx+1` before a sell is possible — the DP never evaluates buy and sell at the same index in the same call.
+
+For this problem, same-day buy+sell nets **negative profit** due to the fee:
+
+```
+buy  day i: -arr[i]
+sell day i: +arr[i] - fee
+net = -fee
+```
+
+This is strictly worse than doing nothing, so the DP will always prefer the `no_buy` path over same-day buy+sell. The constraint is mentioned only to clarify that no enforced gap exists between buy and sell days — it has no effect on the logic.
+
+---
+
 ## Complexity Summary
 
 | Approach | Time | Space |
