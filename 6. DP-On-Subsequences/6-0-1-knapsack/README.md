@@ -46,9 +46,21 @@ f(idx, W) = max(
 
 **After picking, move to `idx-1`** — this is what makes it 0-1 (each item used at most once). Unbounded knapsack stays at `idx` after picking to allow reuse.
 
-**Base case:** `idx == 0` → can only consider item 0. Pick it if `W >= wt[0]`, else return 0.
-
 **Answer:** `f(n-1, W)`
+
+---
+
+## Base Case
+
+The tabulation uses **1-based indexing** — `i` runs from `1` to `n`, where `i` represents the number of items considered so far.
+
+`i = 0` means **no items have been considered yet**. The entire `i = 0` row is `0` by initialisation:
+
+```
+dp[0][j] = 0  for all j   ← 0 items available → maximum value is always 0
+```
+
+This is the implicit base case — no explicit code needed. When the loop starts at `i = 1`, every `dp[i][j]` looks back at `dp[i-1][j]` (the skip path), and at `i = 1` that lookback lands on this all-zero row, which correctly represents having no items to choose from.
 
 ---
 
