@@ -35,15 +35,80 @@ Output: 1   (no two characters match)
 
 ## The Key Insight — Reduce to LCS
 
-The longest palindromic subsequence of `s` is exactly the **LCS of `s` and its reverse**.
+### Step 1 — What does a palindrome look like as a subsequence?
 
-Why? A palindromic subsequence reads the same forwards and backwards. So any palindromic subsequence of `s` is also a subsequence of `reverse(s)`. The longest one common to both is the answer.
+Take `s = "eeeme"`. The longest palindromic subsequence is `"eeee"`.
+
+Write it forwards and backwards:
+```
+forwards : e e e e
+backwards: e e e e
+```
+
+They are identical — that is exactly what a palindrome means. So a palindromic subsequence of `s` is a subsequence that appears **the same way** when you read `s` from left to right and also from right to left.
+
+---
+
+### Step 2 — What does "reading right to left" mean?
+
+Reading `s` from right to left is the same as reading `reverse(s)` from left to right.
 
 ```
-s = "eeeme"
-t = reverse(s) = "emeee"
+s         = "e e e m e"   (left to right)
+reverse(s) = "e m e e e"  (left to right, same as s right to left)
+```
 
-LCS("eeeme", "emeee") = 4   ("eeee")
+So the question becomes: find the longest subsequence that exists in `s` **and** in `reverse(s)`.
+
+That is the definition of LCS.
+
+---
+
+### Step 3 — Why does LCS of `s` and `reverse(s)` give the palindrome?
+
+Let's trace it manually for `s = "eeeme"`:
+
+```
+s = "e e e m e"
+t = "e m e e e"   (reverse of s)
+```
+
+Find characters that appear as a subsequence in **both**:
+
+```
+s : e e e m e
+     ↑ ↑ ↑   ↑
+t : e m e e e
+     ↑   ↑ ↑ ↑
+```
+
+Common subsequence: `e, e, e, e` → length 4 → `"eeee"`
+
+Now verify: is `"eeee"` a palindrome? Yes — reads the same both ways.
+
+This works because:
+- Every character we pick from `s` (left to right) is also present in `t` = `reverse(s)` (left to right)
+- Which means it is also present in `s` from right to left
+- A sequence that reads the same left-to-right and right-to-left in `s` is by definition a palindrome
+
+---
+
+### Step 4 — Another example to cement it
+
+```
+s = "bbabcbcab"
+t = "bacbcbabb"   (reverse of s)
+```
+
+LCS of `s` and `t`:
+
+Common subsequence: `b a b c b a b` → length 7
+
+Verify: `"babcbab"` — is it a palindrome?
+```
+b a b c b a b
+      ↑
+forwards and backwards match  ✓
 ```
 
 No new algorithm needed — the entire LCS tabulation from Problem 1 is reused unchanged.
