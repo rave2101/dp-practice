@@ -85,6 +85,8 @@ return lcsUtil(s, t, ...);   // s and t are the same string — always LCS = SIZ
 
 `reverse(t.begin(), t.end())` works **in-place** on whatever string `t` refers to. Since `t` is an independent copy, `s` stays intact and you correctly have two different strings to feed into LCS.
 
+The `&` is the one character that decides whether you get a safe independent copy or a dangerous alias.
+
 ---
 
 ## Detailed Table Fill
