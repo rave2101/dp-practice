@@ -13,6 +13,56 @@ Problems based on finding the longest increasing subsequence pattern, including 
 | `nlogn.cpp` | Binary Search (Patience Sorting) | O(n log n) | O(n) |
 | `largest_divisible_subset.cpp` | LIS variant — divisibility condition | O(n²) | O(n) |
 | `longest_string_chain.cpp` | LIS variant — predecessor check | O(n²·L) | O(n) |
+| `longest_bitonic_sequence.cpp` | Two LIS passes (forward + backward) | O(n²) | O(n) |
+
+---
+
+## Longest Bitonic Sequence — Problem
+
+**Difficulty:** Medium
+
+Given an array, find the length of the longest **bitonic subsequence** — one that first strictly increases then strictly decreases. A purely increasing or purely decreasing sequence also qualifies.
+
+```
+Input:  arr = [1, 11, 2, 10, 4, 5, 2, 1]
+Output: 7
+Chain:  1 → 2 → 10 → 5 → 2 → 1  (increases then decreases)
+```
+
+### Approach — Two LIS Passes
+
+Treat every index `i` as the **peak** of the bitonic sequence.
+The bitonic sequence through `i` has two parts:
+
+```
+[ increasing part ] → i ← [ decreasing part ]
+```
+
+Run LIS twice:
+- **`dp1[i]`** = LIS length ending **at** `i` (left → right)
+- **`dp2[i]`** = LIS length starting **at** `i` (right → left)
+
+```
+Answer = max over all i of: dp1[i] + dp2[i] - 1
+```
+
+The `-1` removes the double-count of the peak `i` (it appears in both `dp1` and `dp2`).
+
+### Walkthrough: `[1, 11, 2, 10, 4, 5, 2, 1]`
+
+```
+dp1 (LIS ending at i):    [1, 2, 2, 3, 3, 4, 2, 1]
+dp2 (LIS starting at i):  [1, 6, 2, 5, 3, 3, 2, 1]
+
+dp1+dp2-1:                [1, 7, 3, 7, 5, 6, 3, 1]
+
+Answer: 7  ✓
+```
+
+### Why the backward pass is just LIS in reverse
+
+`dp2[i]` = length of longest decreasing subsequence **starting** at `i`.
+A decreasing subsequence going left→right is the same as an increasing subsequence going right→left. So the backward pass runs the exact same LIS loop — just iterating `i` from `SIZE-2` down to `0` and `j` from `SIZE-1` down to `i+1`.
 
 ---
 
