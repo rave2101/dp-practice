@@ -9,6 +9,7 @@ Problems based on finding the longest increasing subsequence pattern, including 
 | File | Approach | Time | Space |
 |---|---|---|---|
 | `memoization.cpp` | Top-Down DP | O(n²) | O(n²) |
+| `tabulation.cpp` | Bottom-Up DP | O(n²) | O(n) |
 | `nlogn.cpp` | Binary Search (Patience Sorting) | O(n log n) | O(n) |
 
 ---
