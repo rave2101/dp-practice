@@ -11,6 +11,50 @@ Problems based on finding the longest increasing subsequence pattern, including 
 | `memoization.cpp` | Top-Down DP | O(n²) | O(n²) |
 | `tabulation.cpp` | Bottom-Up DP | O(n²) | O(n) |
 | `nlogn.cpp` | Binary Search (Patience Sorting) | O(n log n) | O(n) |
+| `largest_divisible_subset.cpp` | LIS variant — divisibility condition | O(n²) | O(n) |
+
+---
+
+## Largest Divisible Subset — Problem
+
+**Difficulty:** Medium
+
+Given an array of positive integers, find the largest subset such that every pair `(a, b)` satisfies `a % b == 0` or `b % a == 0`.
+
+```
+Input:  nums = [3, 5, 10, 20]
+Output: [5, 10, 20]
+
+Explanation: 10 % 5 == 0  and  20 % 10 == 0  ✓
+```
+
+### Why This Is an LIS Variant
+
+After **sorting** the array:
+- For any pair where `j < i`, we have `nums[j] <= nums[i]`, so we only need to check `nums[i] % nums[j] == 0` (never the reverse).
+- Divisibility is **transitive** on a sorted array: if `c % b == 0` and `b % a == 0`, then `c % a == 0` automatically. So we don't need to check every pair — just extend from the last element.
+
+This makes it identical in structure to LIS tabulation, with one change:
+
+| LIS | Largest Divisible Subset |
+|---|---|
+| `nums[i] > nums[j]` | `nums[i] % nums[j] == 0` |
+
+### Walkthrough: `[3, 5, 10, 20]`
+
+```
+i=1 (5):  5%3 ≠ 0                  → dp[1]=1
+i=2 (10): 10%3 ≠ 0, 10%5==0        → dp[2]=2, parent[2]=1
+i=3 (20): 20%3 ≠ 0, 20%5==0 → dp=2
+                    20%10==0 → dp=3 → dp[3]=3, parent[3]=2
+
+dp     = [1, 1, 2, 3]
+parent = [0, 1, 1, 2]
+maxIdx = 3
+
+Backtrack: 3 → 2 → 1, parent[1]==1 stop
+Collected: [20, 10, 5] → reverse → [5, 10, 20]  ✓
+```
 
 ---
 
